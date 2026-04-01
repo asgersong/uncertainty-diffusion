@@ -1,0 +1,15 @@
+[submodule "external/DiCo"]
+	path = external/DiCo
+	url = https://github.com/shallowdream204/DiCo.git
+[submodule "external/guided-diffusion"]
+	path = external/guided-diffusion
+	url = https://github.com/openai/guided-diffusion.git
+[submodule "external/BayesDiff"]
+	path = external/BayesDiff
+	url = https://github.com/karrykkk/BayesDiff.git
+[submodule "external/vnn"]
+	path = external/vnn
+	url = https://github.com/iliiliiliili/variational-nn-pytorch.git
+[submodule "external/diffusion-hallucination"]
+	path = external/diffusion-hallucination
+	url = https://github.com/locuslab/diffusion-model-hallucination.git
