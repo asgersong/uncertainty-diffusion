@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "uncertainty-diffusion"
+version = "0.1.0"
+description = "Uncertainty-guided diffusion correction via variational neural networks"
+authors = ["asgersong"]
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+# Python version — keep in sync with conda env
+python = "~3.10"
+
+# PyTorch — pinned to CUDA 12.6 build (keep in sync with conda env)
+torch = {version = "2.11.0+cu126", source = "pytorch-cu126"}
+torchvision = {version = "0.26.0+cu126", source = "pytorch-cu126"}
+torchaudio = {version = "2.11.0+cu126", source = "pytorch-cu126"}
+
+# Core ML
+accelerate = "^1.13.0"
+diffusers = "^0.37.1"
+timm = "^1.0.26"
+einops = "^0.8.2"
+safetensors = "^0.7.0"
+
+# Data & numerics
+numpy = "^2.2.6"
+scipy = "^1.15.3"
+pillow = "^11.0.0"
+matplotlib = "^3.10.0"
+
+# Config & logging
+wandb = "^0.25.1"
+pyyaml = "^6.0.3"
+tqdm = "^4.67.0"
+
+# HuggingFace ecosystem
+huggingface-hub = "^1.8.0"
+
+# Utilities
+requests = "^2.33.0"
+gitpython = "^3.1.46"
+
+[tool.poetry.group.eval.dependencies]
+# TF-based evaluator — only needed for FID/IS/sFID computation
+tensorflow = "^2.21.0"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^7.2.0"
+ipython = "^8.37.0"
+
+# NOTE: torch, torchvision, torchaudio, and all nvidia/CUDA packages are
+# managed by conda (environment: udiff, cloned from DiCo).
+# Do not add them here — they require special index URLs and CUDA version
+# pinning that conda handles better.
+
+[[tool.poetry.source]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
