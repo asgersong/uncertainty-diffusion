@@ -15,6 +15,24 @@ import os
 pretrained_models = {'DiT-XL-2-512x512.pt', 'DiT-XL-2-256x256.pt'}
 
 
+def load_torch_checkpoint(path):
+    """
+    Load a checkpoint across PyTorch versions.
+
+    PyTorch 2.6 changed torch.load(..., weights_only=...) to default to True,
+    which breaks older research checkpoints that bundle metadata objects such as
+    argparse.Namespace alongside the model weights.
+    """
+    try:
+        return torch.load(
+            path,
+            map_location=lambda storage, loc: storage,
+            weights_only=False,
+        )
+    except TypeError:
+        return torch.load(path, map_location=lambda storage, loc: storage)
+
+
 def find_model(model_name):
     """
     Finds a pre-trained DiT model, downloading it if necessary. Alternatively, loads a model from a local path.
@@ -23,7 +41,7 @@ def find_model(model_name):
         return download_model(model_name)
     else:  # Load a custom DiT checkpoint:
         assert os.path.isfile(model_name), f'Could not find DiT checkpoint at {model_name}'
-        checkpoint = torch.load(model_name, map_location=lambda storage, loc: storage)
+        checkpoint = load_torch_checkpoint(model_name)
         if "ema" in checkpoint:  # supports checkpoints from train.py
             checkpoint = checkpoint["ema"]
         return checkpoint
@@ -39,7 +57,7 @@ def download_model(model_name):
         os.makedirs('pretrained_models', exist_ok=True)
         web_path = f'https://dl.fbaipublicfiles.com/DiT/models/{model_name}'
         download_url(web_path, 'pretrained_models')
-    model = torch.load(local_path, map_location=lambda storage, loc: storage)
+    model = load_torch_checkpoint(local_path)
     return model
 
 
