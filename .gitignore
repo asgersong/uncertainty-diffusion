@@ -1,3 +1,6 @@
+# InceptionV3 model (downloaded by evaluator to cwd)
+classify_image_graph_def.pb
+
 # Python
 __pycache__/
 *.py[cod]
