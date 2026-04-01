@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling", "torch"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vnn"
+version = "0.2.0"
+authors = [
+  {name="Illia Oleksiienko, Dat Thanh Tran, Alexandros Iosifidis", email="io@ece.au.dk"},
+]
+description = "Variational Neural Networks"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/iliiliiliili/variational-nn-pytorch"
+"Bug Tracker" = "https://github.com/iliiliiliili/variational-nn-pytorch/issues"
